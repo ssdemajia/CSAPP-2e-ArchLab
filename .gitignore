@@ -50,3 +50,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+*.yo
+yas
+yis
+hcl2c
+psim
+ssim
+ldriver.ys
+pipe-std.c
+sdriver.ys
+seq-std.c

@@ -1,0 +1,51 @@
+# 链表相加
+    .pos 0
+init:
+    irmovl Stack, %esp
+    irmovl Stack, %ebp
+    call Main
+    halt
+
+.align 4
+ele1:
+    .long 0x00a
+    .long ele2
+ele2:
+    .long 0x0b0
+    .long ele3
+ele3:
+    .long 0xc00
+    .long 0
+
+Main:
+    pushl %ebp
+    rrmovl %esp, %ebp
+    irmovl ele1, %eax
+    pushl %eax
+    call SumList
+    rrmovl %ebp, %esp
+    popl %ebp
+    ret
+SumList:
+    pushl %ebp
+    rrmovl %esp, %ebp
+    mrmovl 8(%ebp), %ebx # ELE指针
+    xorl %eax, %eax      # %eax存放和
+    andl %ebx, %ebx      # 查看ELE指针是否为空
+    je Null              # 当ele==null的情况
+    mrmovl 4(%ebx), %ebx # 得到下一个元素地址
+    pushl %ebx
+    call SumList
+    mrmovl 8(%ebp), %ebx # 重新获得ELE指针，ebx被修改了
+    mrmovl (%ebx), %ecx  # 得到元素值
+    addl %ecx, %eax      # 累加
+    jmp End
+Null:
+    irmovl $0, %eax
+End:
+    rrmovl %ebp, %esp
+    popl %ebp
+    ret
+
+    .pos 0x100
+Stack:
