@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "isa.h": "c",
+        "tk.h": "c",
+        "tcl.h": "c"
+    }
+}
